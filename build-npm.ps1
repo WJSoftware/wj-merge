@@ -90,6 +90,9 @@ begin {
     Copy-Item .\src\package.json .\out
     # Copy-Item .\PublishNote.md .\out\README.md -Force
     Get-Content .\README.md | Add-Content .\out\README.md -Encoding UTF8
+    if ($PSCmdlet.ShouldProcess($path, "Bunding")) {
+        Invoke-Call { npm run bundle }
+    }
     if (!$Publish -and -not $WhatIfPreference) {
         Write-Output "Running npm publish in dry run mode."
         npm publish .\out --dry-run
