@@ -32,7 +32,7 @@ declare module 'wj-merge' {
     /**
      * Data type that defines the properties that are part of the tracing feature.
      */
-    export type TraceResult = {
+    export type TraceResult<T extends SourceObject> = {
         /**
          * List of data sources that qualified after data source predicate evaluation.
          */
@@ -47,7 +47,7 @@ declare module 'wj-merge' {
     /**
      * The result of the merging process.
      */
-    export type MergeResult<T extends SourceObject = SourceObject, B extends boolean> = B extends true ? T & TraceResult : T & Partial<TraceResult>;
+    export type MergeResult<T extends SourceObject = SourceObject, B extends boolean> = B extends true ? T & TraceResult<T> : T & Partial<TraceResult<T>>;
 
     /**
      * Predicate function that receives a single piece of data and emits a judgement in the form of a Boolean value 
