@@ -1,0 +1,29 @@
+{
+  "name": "wj-merge",
+  "version": "0.0.1",
+  "description": "Object merger that creates a single object using objects from various data sources, applying them sequentially and conditionally.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "type": "module",
+  "types": "wj-merge.d.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WJSoftware/wj-merge.git"
+  },
+  "keywords": [
+    "merge",
+    "config"
+  ],
+  "author": "José Pablo Ramírez Vargas (webJose@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WJSoftware/wj-merge/issues"
+  },
+  "homepage": "https://github.com/WJSoftware/wj-merge#readme"
+}
