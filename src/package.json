@@ -20,7 +20,7 @@
     "merge",
     "config"
   ],
-  "author": "José Pablo Ramírez Vargas (webJose@gmail.com)",
+  "author": "José Pablo Ramírez Vargas <webJose@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/WJSoftware/wj-merge/issues"
