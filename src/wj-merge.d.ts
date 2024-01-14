@@ -64,7 +64,7 @@ declare module 'wj-merge' {
      * Function that receives a `Response` object produced by a call to `fetch()` and uses it to manufacture a source 
      * object.
      */
-    export type ProcessFetchResponse = (response: Response) => Promise<SourceObject>;
+    export type ProcessFetchResponse = (response: Response, defaultProcessFn?: (response: Response) => Promise<SourceObject>) => Promise<SourceObject>;
 
     /**
      * Defines the data source identification information that is also found in data traces.

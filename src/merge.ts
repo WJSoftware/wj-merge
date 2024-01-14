@@ -13,13 +13,13 @@ function mergeTwo<TSourceObject extends SourceObject>(obj1: SourceObject, obj2: 
     forEachProperty(obj2, (key, value) => {
         const value1 = obj1[key];
         if (value1 !== undefined) {
-            // If it is a scalar/array value, the value in object 2 must also be a scalar or array.
+            // If it is a leaf value, the value in object 2 must also be a leaf value.
             // If it is an object value, then value in object 2 must also be an object.
             if (isSourceObject(value1) && !isSourceObject(value)) {
-                throw new Error(`The destination value of property "${key}" is an object, but the second object is not providing an object value.`);
+                throw new Error(`The destination value of property "${key}" is a node, but the second object is not providing node value.`);
             }
             if (!isSourceObject(value1) && isSourceObject(value)) {
-                throw new Error(`The destination value of property "${key}" is a scalar/array value, but the second object is not providing a scalar/array value.`);
+                throw new Error(`The destination value of property "${key}" is a leaf value, but the second object is not providing a leaf value.`);
             }
             if (isSourceObject(value1)) {
                 // Recursively merge obj2 into obj1.

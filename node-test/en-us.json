@@ -1,0 +1,13 @@
+{
+    "homepage": {
+        "welcome": "Hello, ",
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "signUp": "Sign Up!"
+    },
+    "signIn": {
+        "username": "Username or email address:",
+        "password": "Password:"
+    },
+    "unrelated": true
+}

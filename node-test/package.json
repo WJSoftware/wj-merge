@@ -1,0 +1,9 @@
+{
+    "name": "note-test",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+        "@types/node": "^20.9.2",
+        "wj-merge": "^0.0.1"
+    }
+}

@@ -32,7 +32,7 @@ export function isFunction(obj: unknown): obj is Function { return typeof obj ==
  * @param loopBody Callback function that receives the property name (key), value and index.  If the callback returns 
  * truthy then the enumeration stops.
  */
-export function forEachProperty<T extends SourceObject>(obj: T, loopBody: (key: keyof T, value: SourceObject[keyof SourceObject], index?: number) => boolean | void) {
+export function forEachProperty<T extends Record<any, any>>(obj: T, loopBody: (key: keyof T, value: Record<any, any>[keyof Record<any, any>], index?: number) => boolean | void) {
     if (!isFunction(loopBody)) {
         throw new Error('The provided loop body is not a function.');
     }

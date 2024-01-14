@@ -8,10 +8,6 @@
   },
   "type": "module",
   "types": "wj-merge.d.ts",
-  "scripts": {
-    "tsc": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WJSoftware/wj-merge.git"

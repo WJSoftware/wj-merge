@@ -1,4 +1,4 @@
-import type { IBuilder, IDataSource, Predicate, SourceObject, LeafValue, DataPredicate, ProcessFetchResponse, MergeResult } from "wj-merge";
+import type { IBuilder, IDataSource, Predicate, SourceObject, LeafValue, DataPredicate, ProcessFetchResponse, MergeResult, Dictionary } from "wj-merge";
 import { DictionaryDataSource } from "./datasources/DictionaryDataSource.js"
 import { FetchedDataSource } from "./datasources/FetchedDataSource.js";
 import { JsonDataSource } from "./datasources/JsonDataSource.js";
@@ -35,7 +35,7 @@ export default class Builder<TSourceObject extends SourceObject> implements IBui
         return this.add(new ObjectDataSource(obj));
     }
 
-    addDictionary(dictionary: SourceObject | (() => Promise<SourceObject>), hierarchySeparator: string = ':', prefixOrPredicate?: string | DataPredicate<keyof SourceObject>): IBuilder<TSourceObject> {
+    addDictionary(dictionary: Dictionary | (() => Promise<Dictionary>), hierarchySeparator: string = ':', prefixOrPredicate?: string | DataPredicate<keyof SourceObject>): IBuilder<TSourceObject> {
         return this.add(new DictionaryDataSource(dictionary, hierarchySeparator, prefixOrPredicate));
     }
 

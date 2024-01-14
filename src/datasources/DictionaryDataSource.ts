@@ -1,4 +1,4 @@
-import type { LeafValue, SourceObject, IDataSource, DataPredicate } from "wj-merge";
+import type { LeafValue, SourceObject, IDataSource, DataPredicate, Dictionary } from "wj-merge";
 import { DataSource } from "./DataSource.js";
 import { attemptParse, forEachProperty, isSourceObject } from "../helpers.js";
 
@@ -17,12 +17,12 @@ const ensurePropertyValue = (obj: SourceObject, name: string) => {
 }
 
 export class DictionaryDataSource extends DataSource implements IDataSource {
-    private _dictionary: SourceObject | (() => Promise<SourceObject>);
+    private _dictionary: Dictionary | (() => Promise<Dictionary>);
     private _hierarchySeparator: string;
-    private _prefixOrDataPredicate?: string | DataPredicate<keyof SourceObject>;
+    private _prefixOrDataPredicate?: string | DataPredicate<keyof Dictionary>;
 
-    #buildDataPredicate(): [DataPredicate<keyof SourceObject>, string] {
-        let dataPredicateFn: DataPredicate<keyof SourceObject> = name => true;
+    #buildDataPredicate(): [DataPredicate<keyof Dictionary>, string] {
+        let dataPredicateFn: DataPredicate<keyof Dictionary> = _name => true;
         let prefix: string = '';
         if (this._prefixOrDataPredicate) {
             if (typeof this._prefixOrDataPredicate === "string") {
@@ -36,7 +36,7 @@ export class DictionaryDataSource extends DataSource implements IDataSource {
         return [dataPredicateFn, prefix];
     }
 
-    #validateDictionary(dic: SourceObject) {
+    #validateDictionary(dic: Dictionary) {
         if (!isSourceObject(dic)) {
             throw new Error('The provided dictionary must be a flat object.');
         }
@@ -47,12 +47,12 @@ export class DictionaryDataSource extends DataSource implements IDataSource {
                 return false;
             }
             if (isSourceObject(v)) {
-                throw new Error(`The provided dictionary must be a flat object:  Property ${k} has a non-scalar value.`);
+                throw new Error(`The provided dictionary must be a flat object:  Property ${k} has a node value.`);
             }
         });
     }
 
-    #inflateDictionary(dic: SourceObject) {
+    #inflateDictionary(dic: Dictionary) {
         const result: SourceObject = {};
         if (!dic || !isSourceObject(dic)) {
             return result;
@@ -87,8 +87,11 @@ export class DictionaryDataSource extends DataSource implements IDataSource {
         return result;
     }
 
-    constructor(dictionary: SourceObject | (() => Promise<SourceObject>), hierarchySeparator: string, prefixOrDataPredicate?: string | DataPredicate<keyof SourceObject>) {
+    constructor(dictionary: Dictionary | (() => Promise<Dictionary>), hierarchySeparator: string, prefixOrDataPredicate?: string | DataPredicate<keyof Dictionary>) {
         super('Dictionary');
+        if ((typeof dictionary !== 'object' && typeof dictionary !== 'function') || dictionary === null) {
+            throw new Error('The provided dictionary is neither a valid object nor a function.');
+        }
         if (!hierarchySeparator) {
             throw new Error('Dictionaries must specify a hierarchy separator.');
         }
